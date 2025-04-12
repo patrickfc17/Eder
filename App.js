@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import { CadastreSePage } from './pages/CadastreSePage'
 import { LinearGradient } from 'expo-linear-gradient'
-import config from './utils/config'
+import config from './styles.config'
 
 const { lighter, light } = config.colors
 const locations = {

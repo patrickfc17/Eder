@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import Svg, { Rect } from 'react-native-svg'
-import defaults from '../utils/config'
+import defaults from '../styles.config'
 
 const { lighter, dark } = defaults.colors
 
