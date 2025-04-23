@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import Svg, { Rect } from 'react-native-svg'
 import defaults from '../styles.config'
 
-const { lighter, dark } = defaults.colors
+const { lighter, darker } = defaults.colors
 
 export const Logo = () => {
   return (
@@ -21,8 +21,8 @@ export const Logo = () => {
           height="39"
           rx="2.5"
           fill={lighter}
-          stroke={dark}
-          stroke-width="3"
+          stroke={darker}
+          strokeWidth={3}
         />
         <Rect
           x="9.13635"
@@ -30,8 +30,8 @@ export const Logo = () => {
           width="23.7273"
           height="23.7273"
           fill={lighter}
-          stroke={dark}
-          stroke-width="3"
+          stroke={darker}
+          strokeWidth={3}
         />
       </Svg>
     </View>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   nome: {
     fontSize: 32,
-    color: dark,
+    color: darker,
     fontWeight: 'semibold',
   },
 })
