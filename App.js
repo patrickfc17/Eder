@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import { CadastreSePage } from './pages/CadastreSePage'
 import { LinearGradient } from 'expo-linear-gradient'
 import config from './styles.config'
+import { Home } from './pages/Home'
 
 const { lighter, light } = config.colors
 const locations = {
@@ -17,7 +18,7 @@ export default function App() {
         colors={[lighter, lighter, light]}
         locations={[locations.start, locations.middle, locations.end]}
         style={styles.container}>
-        <CadastreSePage />
+        <Home />
       </LinearGradient>
     </View>
   )
