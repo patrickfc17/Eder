@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import config from '../styles.config'
 
 const { dark, lighter, light } = config.colors
+const { darkBox } = config.shadows
 
 export const Input = ({ label, icon, placeholder = '', ...props }) => {
   return (
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     color: lighter,
     borderBottomWidth: 1,
     borderBottomColor: light,
-    boxShadow: `0 3px 4px 0 ${dark}`,
+    boxShadow: darkBox,
     outlineStyle: 'none',
   },
 })
