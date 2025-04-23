@@ -4,7 +4,7 @@ import config from '../styles.config'
 
 const { dark, lighter, light } = config.colors
 
-export const Input = ({ label, icon, placeholder = '' }) => {
+export const Input = ({ label, icon, placeholder = '', ...props }) => {
   return (
     <View style={styles.container}>
       <View style={styles.label}>
@@ -15,6 +15,7 @@ export const Input = ({ label, icon, placeholder = '' }) => {
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={light}
+        {...props}
       />
     </View>
   )
@@ -40,7 +41,11 @@ const styles = StyleSheet.create({
     height: 44,
     backgroundColor: dark,
     borderRadius: 6,
-    paddingInline: 12,
+    paddingHorizontal: 12,
     color: lighter,
+    borderBottomWidth: 1,
+    borderBottomColor: light,
+    boxShadow: `0 3px 4px 0 ${dark}`,
+    outlineStyle: 'none',
   },
 })
