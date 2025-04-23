@@ -18,7 +18,7 @@ export default function App() {
         colors={[lighter, lighter, light]}
         locations={[locations.start, locations.middle, locations.end]}
         style={styles.container}>
-        <Home />
+        <CadastreSePage />
       </LinearGradient>
     </View>
   )

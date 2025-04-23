@@ -2,8 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import { Logo } from '../components/Logo'
 import { CadastreSeForm } from '../components/CadastreSeForm'
 import { Sugestao } from '../components/Sugestao'
-import { BotaoCadastrar } from '../components/BotaoCadastrar'
-import { BotaoMaisPergunta } from '../components/BotaoMaisPergunta'
+import { BotaoCadastrar } from '../components/BotaoAzul'
 
 export const CadastreSePage = () => {
   return (
@@ -19,7 +18,9 @@ export const CadastreSePage = () => {
           onNavigate={() => {}}
         />
       </View>
-      <BotaoCadastrar></BotaoCadastrar>
+      <View>
+        <BotaoCadastrar texto="Cadastrar-se" />
+      </View>
     </View>
   )
 }

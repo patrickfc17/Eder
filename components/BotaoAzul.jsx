@@ -3,11 +3,11 @@ import defaults from '../styles.config'
 
 const { lighter, dark, darker } = defaults.colors
 
-export const BotaoCadastrar = () => {
+export const BotaoCadastrar = ({ texto }) => {
   return (
     <View style={styles.label}>
       <View style={styles.botao}>
-        <Text style={styles.text}>Cadastrar-se</Text>
+        <Text style={styles.texto}>{texto}</Text>
       </View>
     </View>
   )
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 8,
   },
-  text: {
+  texto: {
     fontSize: 20,
     color: lighter,
     textAlign: 'center',
