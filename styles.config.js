@@ -4,5 +4,6 @@ export default {
     dark: '#224778',
     lighter: '#E8F2FF',
     light: '#96C4FF',
+    blue: '#1A73E8',
   },
 }
