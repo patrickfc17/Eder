@@ -40,7 +40,6 @@ export const Logo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     marginTop: 42,
     justifyContent: 'center',
