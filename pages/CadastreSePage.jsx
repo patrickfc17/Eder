@@ -3,6 +3,7 @@ import { Logo } from '../components/Logo'
 import { CadastreSeForm } from '../components/CadastreSeForm'
 import { Sugestao } from '../components/Sugestao'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { BotaoCadastrar } from '../components/BotaoAzul'
 
 export const CadastreSePage = () => {
   return (
@@ -19,6 +20,9 @@ export const CadastreSePage = () => {
             goto="Login"
             onNavigate={() => {}}
           />
+        </View>
+        <View>
+          <BotaoCadastrar texto="Cadastrar-se" />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
