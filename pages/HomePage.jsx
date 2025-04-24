@@ -50,7 +50,7 @@ const vagas = [
   },
 ]
 
-export const Home = () => {
+export const HomePage = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
