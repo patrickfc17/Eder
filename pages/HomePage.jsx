@@ -2,6 +2,7 @@ import { Text, StatusBar, StyleSheet, View, ScrollView } from 'react-native'
 import { VagaCard } from '../components/Vagas/VagaCard'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import config from '../styles.config'
+import { BarraPesquisa } from '../components/BarraPesquisa'
 
 const { darker } = config.colors
 
@@ -55,6 +56,7 @@ export const HomePage = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="default" />
+        <BarraPesquisa />
         <Text style={styles.title}>Vagas Disponíveis</Text>
         <ScrollView style={styles.vagasListContainer}>
           <View style={styles.vagas}>

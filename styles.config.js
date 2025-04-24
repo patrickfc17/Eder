@@ -7,6 +7,6 @@ export default {
     blue: '#1A73E8',
   },
   shadows: {
-    darkBox: `0 3px 4px 0 #224778`,
+    darkBox: `0 1px 4px 0 #224778`,
   },
 }
