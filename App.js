@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native'
-import { CadastreSePage } from './pages/CadastreSePage'
 import { LinearGradient } from 'expo-linear-gradient'
 import config from './styles.config'
 import { Home } from './pages/Home'

@@ -1,23 +1,27 @@
-import { StyleSheet, View } from 'react-native'
+import { StatusBar, StyleSheet, View } from 'react-native'
 import { Logo } from '../components/Logo'
 import { CadastreSeForm } from '../components/CadastreSeForm'
 import { Sugestao } from '../components/Sugestao'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 export const CadastreSePage = () => {
   return (
-    <View>
-      <Logo />
-      <View style={styles.form}>
-        <CadastreSeForm />
-      </View>
-      <View style={styles.sugestao}>
-        <Sugestao
-          message="Já está cadastrado?"
-          goto="Login"
-          onNavigate={() => {}}
-        />
-      </View>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <StatusBar barStyle="default" />
+        <Logo />
+        <View style={styles.form}>
+          <CadastreSeForm />
+        </View>
+        <View style={styles.sugestao}>
+          <Sugestao
+            message="Já está cadastrado?"
+            goto="Login"
+            onNavigate={() => {}}
+          />
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 
