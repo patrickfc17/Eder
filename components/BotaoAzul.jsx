@@ -3,7 +3,7 @@ import defaults from '../styles.config'
 
 const { lighter, dark, darker } = defaults.colors
 
-export const BotaoCadastrar = ({ texto }) => {
+export const BotaoAzul = ({ texto }) => {
   return (
     <View style={styles.label}>
       <View style={styles.botao}>
@@ -20,9 +20,8 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   botao: {
-    flex: 2,
+    flex: 1,
     width: 150,
-    height: 140,
     backgroundColor: darker,
     borderRadius: 10,
     borderBottomWidth: 1,
