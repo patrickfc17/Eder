@@ -21,9 +21,7 @@ export const LoginPage = () => {
             onNavigate={() => {}}
           />
         </View>
-        <View>
-          <BotaoAzul texto="Entrar" />
-        </View>
+        <BotaoAzul texto="Entrar" />
       </SafeAreaView>
     </SafeAreaProvider>
   )
@@ -37,10 +35,5 @@ const styles = StyleSheet.create({
   sugestao: {
     alignItems: 'flex-end',
     width: '92%',
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
   },
 })
