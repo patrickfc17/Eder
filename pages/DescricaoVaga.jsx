@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, View, Text } from 'react-native'
-import { Logo } from '../components/Logo'
-import { Menu } from '../components/Menu'
 import { Badge } from '../components/Bagde'
+import { Header } from '../components/Header'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { BotaoAzul } from '../components/BotaoAzul'
 import defaults from '../styles.config'
@@ -12,15 +11,8 @@ export const DescricaoVaga = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
+        <Header />
         <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.menuContainer}>
-              <Menu />
-            </View>
-            <View style={styles.logoContainer}>
-              <Logo />
-            </View>
-          </View>
           <View style={styles.badgesContainer}>
             <Badge text="Remoto" />
             <Badge text="Tempo integral" />
@@ -96,18 +88,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 10,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  menuContainer: {
-    flex: 1,
-  },
-  logoContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
   },
   badgesContainer: {
     flexDirection: 'row',
