@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 45,
-    fontWeight: 'black',
+    fontWeight: 'bold',
     color: darker,
     textAlign: 'center',
   },

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import defaults from '../styles.config'
 
 const { lighter, dark, darker } = defaults.colors
@@ -6,9 +6,9 @@ const { lighter, dark, darker } = defaults.colors
 export const BotaoMaisPergunta = () => {
   return (
     <View style={styles.label}>
-      <View style={styles.botao}>
+      <TouchableOpacity onPress={() => ''} style={styles.botao}>
         <Text style={styles.text}>+ Adicionar pergunta</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   )
 }

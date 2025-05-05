@@ -4,6 +4,7 @@ import { CadastreSeForm } from '../components/CadastreSeForm'
 import { Sugestao } from '../components/Sugestao'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { BotaoAzul } from '../components/BotaoAzul'
+import { CadastrarVagaForm } from '../components/CadastrarVagaForm'
 
 export const CadastreSePage = () => {
   return (
@@ -13,7 +14,7 @@ export const CadastreSePage = () => {
           <StatusBar barStyle="default" />
           <Logo />
           <View style={styles.form}>
-            <CadastreSeForm />
+            <CadastrarVagaForm />
           </View>
           <View style={styles.sugestao}>
             <Sugestao
@@ -22,9 +23,7 @@ export const CadastreSePage = () => {
               onNavigate={() => {}}
             />
           </View>
-          <View>
-            <BotaoAzul texto="Cadastrar-se" />
-          </View>
+          <BotaoAzul texto="Cadastrar-se" />
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
