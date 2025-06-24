@@ -1,9 +1,5 @@
 import { StyleSheet, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { HomePage } from './pages/HomePage'
-import { LoginPage } from './pages/LoginPage'
-import { CadastreSePage } from './pages/CadastreSePage'
-import { DescricaoVaga } from './pages/DescricaoVaga'
 import { CadastrarVaga } from './pages/CadastrarVaga'
 import config from './styles.config'
 

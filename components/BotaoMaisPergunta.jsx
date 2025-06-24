@@ -22,13 +22,14 @@ const styles = StyleSheet.create({
   },
   botao: {
     flex: 2,
-    width: 329,
-    height: 44,
+    width: 310,
+    height: 43,
     backgroundColor: lighter,
-    borderWidth: 1,
-    padding: 12,
+    borderWidth: 2,
+    borderRadius: 6,
   },
   text: {
+    padding: 5,
     fontSize: 20,
     color: darker,
     textAlign: 'center',

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Header } from '../components/Header'
 import { CadastrarVagaForm } from '../components/CadastrarVagaForm'
 import { BotaoMaisPergunta } from '../components/BotaoMaisPergunta'

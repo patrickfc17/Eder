@@ -1,6 +1,7 @@
 import { Input } from './Input'
 import { Form } from './Form'
 import { useState } from 'react'
+import { SelectBox } from './SelectBox'
 
 const inputs = [
   {
@@ -50,12 +51,13 @@ export const CadastrarVagaForm = () => {
       {inputs.map((input, index) => (
         <Input key={index} {...input} />
       ))}
-      <Input
-        label="Área:"
-        icon="sitemap"
-        pickerItems={areas}
-        selectedValue={selectedArea}
-        onValueChange={itemValue => setSelectedArea(itemValue)}
+      <SelectBox
+        label="Área de Atuação"
+        icon="briefcase"
+        placeholder="Selecione área de atuação"
+        value={selectedArea}
+        onChange={setSelectedArea}
+        items={areas}
       />
     </Form>
   )
