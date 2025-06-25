@@ -1,11 +1,16 @@
-import { Text, StatusBar, StyleSheet, View, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, StatusBar } from 'react-native'
 import { VagaCard } from '../components/Vagas/VagaCard'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import config from '../styles.config'
 import { BarraPesquisa } from '../components/BarraPesquisa'
 import { Header } from '../components/Header'
+import { LinearGradient } from 'expo-linear-gradient'
 
-const { darker } = config.colors
+const { darker, lighter, light } = config.colors
+const locations = {
+  start: 0,
+  middle: 0.64,
+  end: 1,
+}
 
 const vagas = [
   {
@@ -52,11 +57,13 @@ const vagas = [
   },
 ]
 
-export const HomePage = () => {
+export default function HomePage() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="default" />
+    <LinearGradient
+      colors={[lighter, lighter, light]}
+      locations={[locations.start, locations.middle, locations.end]}>
+      <StatusBar barStyle="default" />
+      <View style={styles.container}>
         <Header>
           <BarraPesquisa />
         </Header>
@@ -68,8 +75,8 @@ export const HomePage = () => {
             ))}
           </View>
         </ScrollView>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </View>
+    </LinearGradient>
   )
 }
 

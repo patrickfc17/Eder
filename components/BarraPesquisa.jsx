@@ -16,7 +16,7 @@ export const BarraPesquisa = () => {
 
 const styles = StyleSheet.create({
   search: {
-    width: 278,
+    width: 248,
     height: 40,
     borderBottomWidth: 1,
     borderBottomColor: darker,
@@ -26,9 +26,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+    flexGrow: 1,
+    flexShrink: 0,
   },
   input: {
-    width: 226,
+    width: 196,
     height: '100%',
     outlineStyle: 'none',
     color: darker,
