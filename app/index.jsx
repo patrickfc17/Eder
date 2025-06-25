@@ -2,7 +2,7 @@ import { Text, StyleSheet, View, ScrollView, StatusBar } from 'react-native'
 import { VagaCard } from '../components/Vagas/VagaCard'
 import config from '../styles.config'
 import { BarraPesquisa } from '../components/BarraPesquisa'
-import { Header } from '../components/Header'
+import { Header } from '../components/HeaderShoulders'
 import { LinearGradient } from 'expo-linear-gradient'
 
 const { darker, lighter, light } = config.colors
