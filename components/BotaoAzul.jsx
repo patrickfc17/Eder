@@ -1,36 +1,37 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 import defaults from '../styles.config'
 
 const { lighter, dark, darker } = defaults.colors
 
-export const BotaoCadastrar = ({ texto }) => {
+export const BotaoAzul = ({ texto }) => {
   return (
     <View style={styles.label}>
-      <View style={styles.botao}>
+      <TouchableOpacity
+        onPress={() => ''}
+        style={[styles.botao, { backgroundColor: darker }]}>
         <Text style={styles.texto}>{texto}</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   label: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 180,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   botao: {
-    flex: 2,
-    width: 150,
-    height: 140,
-    backgroundColor: darker,
+    padding: 5,
+    width: 180,
+    height: 42,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
-    borderBottomWidth: 1,
-    padding: 8,
   },
   texto: {
-    fontSize: 20,
     color: lighter,
-    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 })
