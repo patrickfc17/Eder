@@ -3,10 +3,10 @@ import defaults from '../styles.config'
 
 const { lighter, dark, darker } = defaults.colors
 
-export const BotaoMaisPergunta = () => {
+export const BotaoMaisPergunta = ({ onPress }) => {
   return (
     <View style={styles.label}>
-      <TouchableOpacity onPress={() => ''} style={styles.botao}>
+      <TouchableOpacity onPress={onPress} style={styles.botao}>
         <Text style={styles.text}>+ Adicionar pergunta</Text>
       </TouchableOpacity>
     </View>
@@ -15,13 +15,11 @@ export const BotaoMaisPergunta = () => {
 
 const styles = StyleSheet.create({
   label: {
-    flexDirection: 'column',
     alignItems: 'center',
     paddingTop: 50,
     borderColor: dark,
   },
   botao: {
-    flex: 2,
     width: 310,
     height: 43,
     backgroundColor: lighter,
