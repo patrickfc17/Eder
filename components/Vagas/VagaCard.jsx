@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { InformacaoGeral } from '../InformacaoGeral'
 import { stylesVagaCard } from './vaga-card.style'
 
 export const VagaCard = ({ vaga }) => {
+  console.log(vaga)
+
   const { tipo } = vaga
 
   const styles = StyleSheet.create(stylesVagaCard(tipo))
@@ -25,9 +27,11 @@ export const VagaCard = ({ vaga }) => {
               message={`Inscrições até: ${vaga.inscricoes}`}
             />
           </View>
-          <View style={styles.button}>
-            <Text style={styles.verMais}>Ver Mais</Text>
-          </View>
+          <TouchableOpacity style={styles.button}>
+            <View>
+              <Text style={styles.verMais}>Ver Mais</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

@@ -1,7 +1,7 @@
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 import defaults from '../styles.config'
 
-const { lighter, dark, darker } = defaults.colors
+const { lighter, darker } = defaults.colors
 
 export const BotaoAzul = ({ texto }) => {
   return (
@@ -17,7 +17,7 @@ export const BotaoAzul = ({ texto }) => {
 
 const styles = StyleSheet.create({
   label: {
-    paddingTop: 180,
+    // paddingTop: 180,
     flexDirection: 'row',
     justifyContent: 'center',
   },

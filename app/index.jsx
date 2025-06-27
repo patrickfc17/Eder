@@ -1,8 +1,15 @@
-import { Text, StyleSheet, View, ScrollView, StatusBar } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  StatusBar,
+  FlatList,
+  ScrollView,
+} from 'react-native'
 import { VagaCard } from '../components/Vagas/VagaCard'
 import config from '../styles.config'
 import { BarraPesquisa } from '../components/BarraPesquisa'
-import { Header } from '../components/HeaderShoulders'
+import { Header } from '../components/Header'
 import { LinearGradient } from 'expo-linear-gradient'
 
 const { darker, lighter, light } = config.colors
@@ -63,19 +70,20 @@ export default function HomePage() {
       colors={[lighter, lighter, light]}
       locations={[locations.start, locations.middle, locations.end]}>
       <StatusBar barStyle="default" />
-      <View style={styles.container}>
-        <Header>
-          <BarraPesquisa />
-        </Header>
-        <Text style={styles.title}>Vagas Disponíveis</Text>
-        <ScrollView style={styles.vagasListContainer}>
-          <View style={styles.vagas}>
-            {vagas.map(vaga => (
-              <VagaCard key={vaga.id} vaga={vaga} />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Header>
+            <BarraPesquisa />
+          </Header>
+          <Text style={styles.title}>Vagas Disponíveis</Text>
+          <FlatList
+            data={vagas}
+            renderItem={({ item }) => <VagaCard vaga={item} />}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.vagas}
+          />
+        </View>
+      </ScrollView>
     </LinearGradient>
   )
 }
@@ -83,10 +91,7 @@ export default function HomePage() {
 const styles = StyleSheet.create({
   container: {
     gap: 42,
-    paddingTop: 16,
-  },
-  vagasListContainer: {
-    height: 700,
+    paddingVertical: 16,
   },
   title: {
     fontSize: 40,

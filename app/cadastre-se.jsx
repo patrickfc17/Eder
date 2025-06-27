@@ -2,7 +2,7 @@ import { StatusBar, StyleSheet, View } from 'react-native'
 import { Logo } from '../components/Logos/Logo'
 import { CadastreSeForm } from '../components/CadastreSeForm'
 import { Sugestao } from '../components/Sugestao'
-import { BotaoCadastrar } from '../components/BotaoAzul'
+import { BotaoAzul } from '../components/BotaoAzul'
 import { LinearGradient } from 'expo-linear-gradient'
 import config from '../styles.config'
 
@@ -31,8 +31,8 @@ export default function CadastreSePage() {
           onNavigate={() => {}}
         />
       </View>
-      <View>
-        <BotaoCadastrar texto="Cadastrar-se" />
+      <View style={styles.botaoCadastreSe}>
+        <BotaoAzul texto="Cadastrar-se" />
       </View>
     </LinearGradient>
   )
@@ -46,5 +46,8 @@ const styles = StyleSheet.create({
   sugestao: {
     alignItems: 'flex-end',
     width: '92%',
+  },
+  botaoCadastreSe: {
+    marginTop: 16,
   },
 })
