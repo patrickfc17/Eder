@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text } from 'react-native'
-import { Logo } from '../components/Logo'
+import { StyleSheet, View } from 'react-native'
+import { Logo } from '../components/Logos/Logo'
 import { Menu } from '../components/Menu'
 
 export const Header = () => {
