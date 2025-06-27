@@ -3,10 +3,14 @@ import { Form } from './Form'
 import { useState } from 'react'
 import { SelectBox } from './SelectBox'
 import { BotaoMaisPergunta } from './BotaoMaisPergunta'
-import { View, Alert, Button, Text, StyleSheet } from 'react-native'
+import { View, Alert, Button, StyleSheet } from 'react-native'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { format, Parse } from 'date-fns'
 import config from '../styles.config'
-import { ModalMaisPergunta } from './ModalMoreQuestion'
+import { ModalMaisPergunta } from './ModalMaisPergunta'
 import { ModalEditarPergunta } from './ModalEditarPergunta'
+import { useEffect } from 'react'
+import { fetchVagas } from '../src/services/vagasService'
 
 const { dark, lighter, light, darker } = config.colors
 const { darkBox } = config.shadows
@@ -32,6 +36,20 @@ const inputs = [
     icon: 'building',
   },
 ]
+const periodo = [
+  { label: 'Selecione o periodo de trabalho', value: '' },
+  { label: 'Integral', value: 'Integral' },
+  { label: 'Estagio', value: 'Estagio' },
+  { label: 'Meio-Periodo', value: 'Meio-Periodo' },
+  { label: 'Freelance', value: 'Freelance' },
+  { label: 'Trainee', value: 'Trainee' },
+]
+const modelos = [
+  { label: 'Selecione a modalidade', value: '' },
+  { label: 'Presencial', value: 'Presencial' },
+  { label: 'Hibrida', value: 'Hibrida' },
+  { label: 'Remota', value: 'Remota' },
+]
 const areas = [
   { label: 'Selecione uma área', value: '' },
   { label: 'DevOps', value: 'DevOps' },
@@ -53,19 +71,51 @@ const areas = [
 ]
 
 export const CadastrarVagaForm = () => {
-  const [selectedArea, setSelectedArea] = useState([])
+  useEffect(() => {
+    const getAllVagas = async () => {
+      const res = await fetchVagas()
+      console.log('res', res)
+    }
+    getAllVagas()
+  }, [])
+
+  //Select's
+  const [selectedArea, setSelectedArea] = useState('')
+  const [selectedModelo, setSelectedModelo] = useState('')
+  const [selectPeriodo, setSelectedPeriodo] = useState('')
+  const [data, setDate] = useState(new Date())
+  const [show, setShow] = useState(false)
+  const [dataText, setDataText] = useState(format(new Date(), 'dd/MM/yyyy'))
+
+  //InpuData
+  const onChange = (event, selectData) => {
+    const currentData = selectData || data
+    setShow(false)
+    setDate(currentData)
+    setDataText(format(currentData, 'dd/MM/yyyy'))
+  }
+  const onChangeText = text => {
+    setDataText(text)
+
+    if (text.length === 10) {
+      try {
+        const parsed = Parse(text, 'dd/MM/yyyy', new Date())
+        if (!isNaN(parsed)) {
+          setDate(parsed)
+        }
+      } catch (error) {}
+    }
+  }
   //crud
   //criar
   const [modalVisible, setModalVisible] = useState(false)
   const [novaPergunta, setNovaPergunta] = useState('')
   const [novoPlaceholder, setNovoPlaceholder] = useState('')
-
   //editar
   const [modalEditarVisible, setModalEditarVisible] = useState(false)
   const [indiceEditado, setIndiceEditado] = useState(null)
   const [labelEditado, setlabelEditado] = useState('')
   const [placeholderEditado, setPlaceholderEditado] = useState('')
-
   //deletar
   const deletarPergunta = indice => {
     Alert.alert(
@@ -93,6 +143,22 @@ export const CadastrarVagaForm = () => {
       {inputs.map((input, index) => (
         <Input key={index} {...input} />
       ))}
+      <Input
+        label="Data de Conclusão"
+        icon="calendar"
+        placeholder="dd/mm/aaaa"
+        value={dataText}
+        onChangeText={onChangeText}
+        onPressIn={() => setShow(true)}
+      />
+      {show && (
+        <DateTimePicker
+          value={data}
+          mode="date"
+          display="default"
+          onChange={onChange}
+        />
+      )}
       <SelectBox
         label="Área de Atuação"
         icon="briefcase"
@@ -100,6 +166,22 @@ export const CadastrarVagaForm = () => {
         value={selectedArea}
         onChange={setSelectedArea}
         items={areas}
+      />
+      <SelectBox
+        label="Modalidade da Vaga"
+        icon="briefcase"
+        placeholder="Selecione modalidade da vaga"
+        value={selectedModelo}
+        onChange={setSelectedModelo}
+        items={modelos}
+      />
+      <SelectBox
+        label="Periodo de Trabalho"
+        icon="briefcase"
+        placeholder="Selecione periodo da vaga"
+        value={selectPeriodo}
+        onChange={setSelectedPeriodo}
+        items={periodo}
       />
       {perguntas.map((pergunta, indice) => (
         <View key={indice}>
