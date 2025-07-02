@@ -29,6 +29,18 @@ export default function RootLayout() {
             title: 'Cadastre-se',
           }}
         />
+        <Stack.Screen
+          name="vagas/cadastrar"
+          options={{
+            title: 'Cadastrar Vaga',
+          }}
+        />
+        <Stack.Screen
+          name="vagas/[id]/index"
+          options={{
+            title: 'Descrição da Vaga',
+          }}
+        />
       </Stack>
     </LinearGradient>
   )

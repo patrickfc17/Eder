@@ -3,11 +3,11 @@ import defaults from '../styles.config'
 
 const { lighter, darker } = defaults.colors
 
-export const BotaoAzul = ({ texto }) => {
+export const BotaoAzul = ({ texto, onPress = null }) => {
   return (
     <View style={styles.label}>
       <TouchableOpacity
-        onPress={() => ''}
+        onPress={onPress}
         style={[styles.botao, { backgroundColor: darker }]}>
         <Text style={styles.texto}>{texto}</Text>
       </TouchableOpacity>
