@@ -1,10 +1,10 @@
 import { ScrollView } from 'react-native'
-import { Header } from '../components/Header'
-import { CandidaturaForm } from '../components/CandidaturaForm'
-import { BotaoAzul } from '../components/BotaoAzul'
+import { Header } from '../../components/Header'
+import { CandidaturaForm } from '../../components/CandidaturaForm'
+import { BotaoAzul } from '../../components/BotaoAzul'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useRef } from 'react'
-export const CandidatarVaga = () => {
+export default function CandidatarVaga() {
   const formRef = useRef()
 
   const handleEnviar = () => {
@@ -18,7 +18,10 @@ export const CandidatarVaga = () => {
         <ScrollView>
           <Header />
           <CandidaturaForm ref={formRef} />
-          <BotaoAzul texto="Enviar" onPress={handleEnviar}></BotaoAzul>
+          <BotaoAzul
+            texto="Enviar"
+            onPress={handleEnviar}
+            style={{ marginTop: 60 }}></BotaoAzul>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

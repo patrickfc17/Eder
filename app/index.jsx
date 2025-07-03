@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { fetchVagas } from '../src/services/vagasService'
+import { BotaoAzul } from '../components/BotaoAzul'
 
 const { darker, lighter, light } = config.colors
 const locations = {
@@ -102,20 +103,24 @@ export default function HomePage() {
       locations={[locations.start, locations.middle, locations.end]}
       style={{ flex: 1 }}>
       <StatusBar barStyle="default" />
-      <ScrollView>
-        <View style={styles.container}>
-          <Header>
-            <BarraPesquisa />
-          </Header>
-          <Text style={styles.title}>Vagas Disponíveis</Text>
-          <FlatList
-            data={vagas}
-            renderItem={({ item }) => <VagaCard vaga={item} />}
-            keyExtractor={item => item.id}
-            contentContainerStyle={styles.vagas}
-          />
-        </View>
-      </ScrollView>
+      {/* <ScrollView> */}
+      <View style={styles.container}>
+        <Header>
+          <BarraPesquisa />
+        </Header>
+        <Text style={styles.title}>Vagas Disponíveis</Text>
+        <FlatList
+          data={vagas}
+          renderItem={({ item }) => <VagaCard vaga={item} />}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.vagas}
+        />
+      </View>
+      {/* </ScrollView> */}
+      <BotaoAzul
+        texto="Cadastrar Vaga"
+        onPress={() => router.push('/vagas/cadastrar')}
+      />
     </LinearGradient>
   )
 }

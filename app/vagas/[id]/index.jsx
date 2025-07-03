@@ -5,7 +5,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { BotaoAzul } from '../../../components/BotaoAzul'
 import config from '../../../styles.config'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useGlobalSearchParams } from 'expo-router'
+import { useGlobalSearchParams, useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { fetchVaga } from '../../../src/services/vagasService'
 
@@ -31,6 +31,7 @@ const periodos = {
 }
 
 export default function DescricaoVaga() {
+  const router = useRouter()
   const [vaga, setVaga] = useState({})
   const { id } = useGlobalSearchParams()
 
@@ -66,7 +67,10 @@ export default function DescricaoVaga() {
                 Inscrições: {vaga.data_conclusao}
               </Text>
             </View>
-            <BotaoAzul texto="Candidatar-se" />
+            <BotaoAzul
+              texto="Candidatar-se"
+              onPress={() => router.push('/vagas/candidatar-se')}
+            />
           </ScrollView>
         </LinearGradient>
       </SafeAreaView>

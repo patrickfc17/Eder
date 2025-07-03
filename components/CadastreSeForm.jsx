@@ -45,9 +45,7 @@ export const CadastreSeForm = () => {
 
         setShowPicker(!showPicker)
       },
-      onPress: () => {
-        setShowPicker(!showPicker)
-      },
+      onPress: () => setShowPicker(!showPicker),
     },
     {
       label: 'Senha',

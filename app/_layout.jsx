@@ -36,6 +36,12 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
+          name="vagas/candidatar-se"
+          options={{
+            title: 'Candidatura Simplificada',
+          }}
+        />
+        <Stack.Screen
           name="vagas/[id]/index"
           options={{
             title: 'Descrição da Vaga',
