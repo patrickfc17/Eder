@@ -1,43 +1,82 @@
+import { useContext, useState } from 'react'
+import { UserContext } from '../app/login'
 import { Form } from './Form'
 import { Input } from './Input'
-
-const inputs = [
-  {
-    label: 'Nome',
-    icon: 'user',
-    placeholder: 'John Doe',
-    autoFocus: true,
-  },
-  {
-    label: 'Email',
-    icon: 'envelope',
-    placeholder: 'johndoe@email.com',
-  },
-  {
-    label: 'Data de Nascimento',
-    icon: 'calendar',
-    placeholder: '00/00/0000',
-    textContentType: 'birthdate',
-  },
-  {
-    label: 'Senha',
-    icon: 'key',
-    placeholder: '********',
-    secureTextEntry: true,
-  },
-  {
-    label: 'Confirmar Senha',
-    icon: 'lock',
-    placeholder: '********',
-    secureTextEntry: true,
-  },
-]
+import RNDateTimePicker from '@react-native-community/datetimepicker'
+import { DateInput } from './DateInput'
 
 export const CadastreSeForm = () => {
+  const [user, setUser] = useContext(UserContext)
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPicker, setShowPicker] = useState(false)
+
+  const inputs = [
+    {
+      label: 'Nome',
+      icon: 'user',
+      placeholder: 'John Doe',
+      autoFocus: true,
+      onChangeText: nome => {
+        setUser(user => ({ ...user, nome }))
+      },
+    },
+    {
+      label: 'Email',
+      icon: 'envelope',
+      placeholder: 'johndoe@email.com',
+      onChangeText: email => {
+        setUser(user => ({ ...user, email }))
+      },
+    },
+    {
+      label: 'Data de Nascimento',
+      icon: 'calendar',
+      placeholder: '00/00/0000',
+      textContentType: 'birthdate',
+      isDate: true,
+      showPicker,
+      value: user.data_nascimento,
+      onDateChange: ({ type }, date) => {
+        if (type === 'set') {
+          setUser(user => ({
+            ...user,
+            data_nascimento: date,
+          }))
+        }
+
+        setShowPicker(!showPicker)
+      },
+      onPress: () => {
+        setShowPicker(!showPicker)
+      },
+    },
+    {
+      label: 'Senha',
+      icon: 'key',
+      placeholder: '********',
+      secureTextEntry: true,
+      onChangeText: password => {
+        setUser(user => ({ ...user, password }))
+      },
+    },
+    {
+      label: 'Confirmar Senha',
+      icon: 'lock',
+      placeholder: '********',
+      secureTextEntry: true,
+      onChangeText: password => {
+        setConfirmPassword(password)
+      },
+    },
+  ]
+
   return (
     <Form title="Cadastre-se">
       {inputs.map((input, index) => (
-        <Input key={index} {...input} />
+        <>
+          {!input.isDate && <Input key={index} {...input} />}
+          {!!input.isDate && <DateInput key={index} {...input} />}
+        </>
       ))}
     </Form>
   )
