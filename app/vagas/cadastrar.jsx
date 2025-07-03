@@ -19,6 +19,7 @@ export default function CadastrarVaga() {
   const handleCadastrar = () => {
     formRef.current?.handleSubmit()
   }
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>

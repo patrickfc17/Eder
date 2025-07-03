@@ -84,7 +84,6 @@ export const CadastrarVagaForm = forwardRef((props, ref) => {
     'Empresa:': '',
   })
 
-  //Select's
   const [selectedArea, setSelectedArea] = useState('')
   const [selectedModelo, setSelectedModelo] = useState('')
   const [selectPeriodo, setSelectedPeriodo] = useState('')
@@ -92,7 +91,6 @@ export const CadastrarVagaForm = forwardRef((props, ref) => {
   const [show, setShow] = useState(false)
   const [dataText, setDataText] = useState(format(new Date(), 'dd/MM/yyyy'))
 
-  //InpuData
   const onChange = (event, selectData) => {
     const currentData = selectData || data
     setShow(false)
@@ -111,18 +109,17 @@ export const CadastrarVagaForm = forwardRef((props, ref) => {
       } catch (error) {}
     }
   }
-  //crud
-  //criar
+
   const [perguntas, setPerguntas] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
   const [novaPergunta, setNovaPergunta] = useState('')
   const [novoPlaceholder, setNovoPlaceholder] = useState('')
-  //editar
+
   const [modalEditarVisible, setModalEditarVisible] = useState(false)
   const [indiceEditado, setIndiceEditado] = useState(null)
   const [labelEditado, setlabelEditado] = useState('')
   const [placeholderEditado, setPlaceholderEditado] = useState('')
-  //deletar
+
   const deletarPergunta = indice => {
     Alert.alert(
       'Confirmar exclusão',
@@ -168,6 +165,7 @@ export const CadastrarVagaForm = forwardRef((props, ref) => {
   }
 
   useImperativeHandle(ref, () => ({ handleSubmit }))
+
   return (
     <Form title="Cadastrar Vaga">
       {inputs.map((input, index) => (

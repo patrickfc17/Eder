@@ -69,7 +69,7 @@ export default function CadastreSePage() {
         <Sugestao
           message="Já está cadastrado?"
           goto="Login"
-          onNavigate={() => {}}
+          onNavigate={() => router.push('/login')}
         />
       </View>
       <View style={styles.botaoCadastreSe}>

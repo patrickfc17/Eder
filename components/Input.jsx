@@ -1,8 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import config from '../styles.config'
-import { useState } from 'react'
-import RNDateTimePicker from '@react-native-community/datetimepicker'
 
 const { dark, lighter, light } = config.colors
 const { darkBox } = config.shadows
@@ -11,7 +9,7 @@ export const Input = ({
   label,
   icon,
   placeholder = '',
-  multiline = true,
+  multiline = false,
   ...props
 }) => {
   return (

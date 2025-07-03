@@ -5,6 +5,9 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { BotaoAzul } from '../../../components/BotaoAzul'
 import config from '../../../styles.config'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useGlobalSearchParams } from 'expo-router'
+import { useEffect, useState } from 'react'
+import { fetchVaga } from '../../../src/services/vagasService'
 
 const { dark, lighter, light } = config.colors
 const locations = {
@@ -13,10 +16,37 @@ const locations = {
   end: 1,
 }
 
+const modelos = {
+  remota: 'Remota',
+  presencial: 'Presencial',
+  hibrida: 'Híbrida',
+}
+
+const periodos = {
+  integral: 'Tempo Integral',
+  estagio: 'Estágio',
+  'meio-periodo': 'Meio Período',
+  freelance: 'Freelance',
+  trainee: 'Trainee',
+}
+
 export default function DescricaoVaga() {
+  const [vaga, setVaga] = useState({})
+  const { id } = useGlobalSearchParams()
+
+  const loadVaga = async () => {
+    const vaga = await fetchVaga(id)
+
+    setVaga(vaga)
+  }
+
+  useEffect(() => {
+    loadVaga()
+  }, [])
+
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <LinearGradient
           colors={[lighter, lighter, light]}
           locations={[locations.start, locations.middle, locations.end]}
@@ -24,69 +54,16 @@ export default function DescricaoVaga() {
           <Header />
           <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.badgesContainer}>
-              <Badge text="Remoto" />
-              <Badge text="Tempo integral" />
+              <Badge text={modelos[vaga.modelo]} />
+              <Badge text={periodos[vaga.periodo]} />
             </View>
             <View style={styles.descricaoContainer}>
-              <Text style={styles.titulo}>Sobre Nós:</Text>
+              <Text style={styles.titulo}>{vaga.titulo}</Text>
+              <Text style={styles.texto}>{vaga.descricao}</Text>
+              <Text style={styles.texto}>Empresa: {vaga.empresa}</Text>
+              <Text style={styles.texto}>Área: {vaga.area}</Text>
               <Text style={styles.texto}>
-                Somos uma empresa líder em inovação tecnológica, dedicada a
-                criar soluções de software que transformam desafios complexos em
-                oportunidades. Atuamos em áreas como computação em nuvem,
-                inteligência artificial e IoT, valorizando um ambiente
-                colaborativo, inclusivo e orientado para o crescimento contínuo.
-              </Text>
-
-              <Text style={styles.titulo}>Responsabilidades:</Text>
-              <Text style={styles.texto}>
-                • Desenvolver e manter sistemas escaláveis e de alta
-                performance.
-                {'\n'}• Colaborar com equipes multidisciplinares (Product, UX,
-                QA) para definir requisitos e entregar soluções alinhadas às
-                necessidades dos clientes.{'\n'}• Participar de revisões de
-                código e promover boas práticas de programação.{'\n'}• Resolver
-                problemas técnicos e otimizar desempenho de aplicações.{'\n'}•
-                Acompanhar tendências tecnológicas e propor melhorias em
-                produtos existentes.
-                {'\n'}• Documentar processos e garantir clareza no ciclo de
-                desenvolvimento.{'\n'}• Trabalhar em metodologias ágeis (Scrum,
-                Kanban).
-              </Text>
-
-              <Text style={styles.titulo}>Requisitos Obrigatórios:</Text>
-              <Text style={styles.texto}>
-                • Graduação em Ciência da Computação, Engenharia de Software ou
-                áreas correlatas.{'\n'}• Experiência mínima de 2 anos em
-                desenvolvimento de software.{'\n'}• Domínio em linguagens como
-                Java, Python, JavaScript/TypeScript e frameworks como Spring,
-                React ou Node.js.{'\n'}• Conhecimento em bancos de dados
-                relacionais (PostgreSQL, MySQL) e NoSQL (MongoDB, Cassandra).
-                {'\n'}• Familiaridade com plataformas de nuvem (AWS, Azure,
-                Google Cloud).{'\n'}• Experiência com controle de versão (Git) e
-                integração contínua.{'\n'}• Habilidades analíticas para resolver
-                problemas complexos.{'\n'}• Comunicação clara e capacidade de
-                trabalhar em equipe.
-              </Text>
-
-              <Text style={styles.titulo}>Diferenciais:</Text>
-              <Text style={styles.texto}>
-                • Pós-graduação em áreas relacionadas.{'\n'}• Conhecimento em
-                DevOps (Docker, Kubernetes), arquitetura de microsserviços e
-                pipelines CI/CD.{'\n'}• Experiência com testes automatizados
-                (JUnit, Selenium).{'\n'}• Contribuições em projetos open source
-                ou portfólio público (GitHub, GitLab).{'\n'}• Certificações em
-                cloud (AWS Certified, Azure Developer).
-              </Text>
-
-              <Text style={styles.titulo}>Benefícios:</Text>
-              <Text style={styles.texto}>
-                • Salário competitivo + bônus por desempenho.{'\n'}•
-                Flexibilidade de horário e trabalho remoto/híbrido.{'\n'}• Plano
-                de saúde e odontológico.{'\n'}• Acesso a cursos, conferências e
-                mentoria para desenvolvimento profissional.{'\n'}• Stock options
-                e programa de participação nos lucros.{'\n'}• Programas de
-                bem-estar (yoga, parcerias com academias).{'\n'}• Eventos de
-                integração e cultura descontraída.
+                Inscrições: {vaga.data_conclusao}
               </Text>
             </View>
             <BotaoAzul texto="Candidatar-se" />
@@ -110,14 +87,15 @@ const styles = StyleSheet.create({
   },
   descricaoContainer: {
     gap: 12,
+    marginBottom: 60,
   },
   titulo: {
-    fontSize: 18,
+    fontSize: 32,
     marginTop: 12,
     color: dark,
   },
   texto: {
-    fontSize: 14,
+    fontSize: 18,
     lineHeight: 20,
     color: dark,
   },

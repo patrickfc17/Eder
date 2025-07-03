@@ -16,7 +16,7 @@ export default function RootLayout() {
       colors={[lighter, lighter, light]}
       locations={[locations.start, locations.middle, locations.end]}
       style={styles.container}>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack>
         <Stack.Screen
           name="index"
           options={{

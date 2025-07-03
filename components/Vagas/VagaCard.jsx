@@ -1,9 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { InformacaoGeral } from '../InformacaoGeral'
 import { stylesVagaCard } from './vaga-card.style'
+import { useRouter } from 'expo-router'
 
 export const VagaCard = ({ vaga }) => {
-  console.log(vaga)
+  const router = useRouter()
 
   const { tipo } = vaga
 
@@ -27,7 +28,9 @@ export const VagaCard = ({ vaga }) => {
               message={`Inscrições até: ${vaga.inscricoes}`}
             />
           </View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.push(`/vagas/${vaga.id}`)}>
             <View>
               <Text style={styles.verMais}>Ver Mais</Text>
             </View>

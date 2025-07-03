@@ -7,7 +7,6 @@ import { DateInput } from './DateInput'
 
 export const CadastreSeForm = () => {
   const [user, setUser] = useContext(UserContext)
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [showPicker, setShowPicker] = useState(false)
 
   const inputs = [
@@ -59,23 +58,17 @@ export const CadastreSeForm = () => {
         setUser(user => ({ ...user, password }))
       },
     },
-    {
-      label: 'Confirmar Senha',
-      icon: 'lock',
-      placeholder: '********',
-      secureTextEntry: true,
-      onChangeText: password => {
-        setConfirmPassword(password)
-      },
-    },
   ]
 
   return (
     <Form title="Cadastre-se">
       {inputs.map((input, index) => (
         <>
-          {!input.isDate && <Input key={index} {...input} />}
-          {!!input.isDate && <DateInput key={index} {...input} />}
+          {!!input.isDate ? (
+            <DateInput key={index} {...input} />
+          ) : (
+            <Input key={index} {...input} />
+          )}
         </>
       ))}
     </Form>

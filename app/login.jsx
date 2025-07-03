@@ -59,8 +59,8 @@ export default function LoginPage() {
           <View style={styles.sugestao}>
             <Sugestao
               message="Não possui conta?"
-              goto="Cadastra-se"
-              onNavigate={() => {}}
+              goto="Cadastre-se"
+              onNavigate={() => router.push('/cadastre-se')}
             />
           </View>
           <BotaoAzul texto="Entrar" onPress={handleLogin} />
