@@ -11,12 +11,9 @@ export const Input = ({
   label,
   icon,
   placeholder = '',
-  multiline = false,
+  multiline = true,
   ...props
 }) => {
-  const fontSize =
-    placeholder.length > 30 ? 12 : placeholder.length > 20 ? 14 : 16
-
   return (
     <View style={styles.container}>
       <View style={styles.label}>
@@ -25,9 +22,7 @@ export const Input = ({
       </View>
       <TextInput
         multiline={multiline}
-        numberOfLines={multiline ? 5 : 1}
-        maxLength={40}
-        style={[styles.input, { fontSize }]}
+        style={[styles.input]}
         placeholder={placeholder}
         placeholderTextColor={light}
         {...props}
@@ -54,7 +49,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 2,
     width: 329,
-    height: 44,
+    minHeight: 44,
     backgroundColor: dark,
     borderRadius: 6,
     paddingHorizontal: 12,

@@ -1,19 +1,18 @@
 import { Input } from './Input'
 import { Form } from './Form'
-import { useState } from 'react'
+import { forwardRef, useState, useEffect, useImperativeHandle } from 'react'
 import { SelectBox } from './SelectBox'
 import { BotaoMaisPergunta } from './BotaoMaisPergunta'
 import { View, Alert, Button, StyleSheet } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { format, Parse } from 'date-fns'
+import { format, parse } from 'date-fns'
 import config from '../styles.config'
 import { ModalMaisPergunta } from './ModalMaisPergunta'
 import { ModalEditarPergunta } from './ModalEditarPergunta'
-import { useEffect } from 'react'
 import { fetchVagas } from '../src/services/vagasService'
+import { supabase } from '../src/lib/supabase'
 
-const { dark, lighter, light, darker } = config.colors
-const { darkBox } = config.shadows
+const { dark } = config.colors
 
 const inputs = [
   {
@@ -38,17 +37,17 @@ const inputs = [
 ]
 const periodo = [
   { label: 'Selecione o periodo de trabalho', value: '' },
-  { label: 'Integral', value: 'Integral' },
-  { label: 'Estagio', value: 'Estagio' },
-  { label: 'Meio-Periodo', value: 'Meio-Periodo' },
-  { label: 'Freelance', value: 'Freelance' },
-  { label: 'Trainee', value: 'Trainee' },
+  { label: 'Integral', value: 'integral' },
+  { label: 'Estagio', value: 'estagio' },
+  { label: 'Meio-Periodo', value: 'meio-Periodo' },
+  { label: 'Freelance', value: 'freelance' },
+  { label: 'Trainee', value: 'trainee' },
 ]
 const modelos = [
   { label: 'Selecione a modalidade', value: '' },
-  { label: 'Presencial', value: 'Presencial' },
-  { label: 'Hibrida', value: 'Hibrida' },
-  { label: 'Remota', value: 'Remota' },
+  { label: 'Presencial', value: 'presencial' },
+  { label: 'Hibrida', value: 'hibrida' },
+  { label: 'Remota', value: 'remota' },
 ]
 const areas = [
   { label: 'Selecione uma área', value: '' },
@@ -70,7 +69,7 @@ const areas = [
   { label: 'Machine Learning', value: 'Machine Learning' },
 ]
 
-export const CadastrarVagaForm = () => {
+export const CadastrarVagaForm = forwardRef((props, ref) => {
   useEffect(() => {
     const getAllVagas = async () => {
       const res = await fetchVagas()
@@ -78,6 +77,12 @@ export const CadastrarVagaForm = () => {
     }
     getAllVagas()
   }, [])
+
+  const [inputValues, setInputValues] = useState({
+    Titulo: '',
+    'Descrição da vaga:': '',
+    'Empresa:': '',
+  })
 
   //Select's
   const [selectedArea, setSelectedArea] = useState('')
@@ -99,7 +104,7 @@ export const CadastrarVagaForm = () => {
 
     if (text.length === 10) {
       try {
-        const parsed = Parse(text, 'dd/MM/yyyy', new Date())
+        const parsed = parse(text, 'dd/MM/yyyy', new Date())
         if (!isNaN(parsed)) {
           setDate(parsed)
         }
@@ -108,6 +113,7 @@ export const CadastrarVagaForm = () => {
   }
   //crud
   //criar
+  const [perguntas, setPerguntas] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
   const [novaPergunta, setNovaPergunta] = useState('')
   const [novoPlaceholder, setNovoPlaceholder] = useState('')
@@ -136,12 +142,43 @@ export const CadastrarVagaForm = () => {
     )
   }
 
-  const [perguntas, setPerguntas] = useState([])
+  const handleSubmit = async () => {
+    const {
+      data: result,
+      error,
+      status,
+    } = await supabase.from('vagas').insert({
+      titulo: inputValues['Titulo'],
+      descricao: inputValues['Descrição da vaga:'],
+      empresa: inputValues['Empresa:'],
+      area: selectedArea,
+      modelo: selectedModelo,
+      periodo: selectPeriodo,
+      data_conclusao: data.toISOString().split('T')[0],
+    })
 
+    console.log('STATUS', status)
+    console.log('DATA', result)
+    console.log('ERROR', error)
+    if (error) {
+      Alert.alert('Erro ao cadastrar', error.message)
+    } else {
+      Alert.alert('Sucesso', 'Vaga cadastrada!')
+    }
+  }
+
+  useImperativeHandle(ref, () => ({ handleSubmit }))
   return (
     <Form title="Cadastrar Vaga">
       {inputs.map((input, index) => (
-        <Input key={index} {...input} />
+        <Input
+          key={index}
+          {...input}
+          value={inputValues[input.label]}
+          onChangeText={text =>
+            setInputValues(prev => ({ ...prev, [input.label]: text }))
+          }
+        />
       ))}
       <Input
         label="Data de Conclusão"
@@ -193,10 +230,7 @@ export const CadastrarVagaForm = () => {
               value={pergunta.resposta}
               onChangeText={texto => {
                 const novas = [...perguntas]
-                novas[indice] = {
-                  ...novas[indice],
-                  resposta: texto,
-                }
+                novas[indice].resposta = texto
                 setPerguntas(novas)
               }}
             />
@@ -271,7 +305,7 @@ export const CadastrarVagaForm = () => {
       />
     </Form>
   )
-}
+})
 
 const style = StyleSheet.create({
   botoesContainer: {

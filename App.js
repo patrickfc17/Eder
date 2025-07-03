@@ -16,9 +16,7 @@ export default function App() {
       <LinearGradient
         colors={[lighter, lighter, light]}
         locations={[locations.start, locations.middle, locations.end]}
-        style={styles.container}>
-        <CadastrarVaga />
-      </LinearGradient>
+        style={styles.container}></LinearGradient>
     </View>
   )
 }
