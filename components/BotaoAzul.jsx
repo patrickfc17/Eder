@@ -17,7 +17,6 @@ export const BotaoAzul = ({ texto, onPress = null }) => {
 
 const styles = StyleSheet.create({
   label: {
-    paddingTop: 60,
     flexDirection: 'row',
     justifyContent: 'center',
   },

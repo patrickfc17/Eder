@@ -5,6 +5,11 @@ import { Sugestao } from '../components/Sugestao'
 import { BotaoAzul } from '../components/BotaoAzul'
 import { LinearGradient } from 'expo-linear-gradient'
 import config from '../styles.config'
+import { useState } from 'react'
+import { UserContext } from './login'
+import { useRouter } from 'expo-router'
+import { supabase } from '../src/lib/supabase'
+import { register } from '../src/services/user-service'
 
 const { lighter, light } = config.colors
 const locations = {
@@ -14,6 +19,40 @@ const locations = {
 }
 
 export default function CadastreSePage() {
+  const router = useRouter()
+
+  const [user, setUser] = useState({
+    nome: '',
+    data_nascimento: new Date(),
+    email: '',
+    password: '',
+  })
+
+  const handleRegister = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: user.email,
+      password: user.password,
+    })
+
+    if (error) {
+      console.error('Erro ao cadastrar:', error)
+      return
+    }
+
+    try {
+      await register({
+        id: data.user.id,
+        nome: user.nome,
+        data_nascimento: user.data_nascimento.toISOString().split('T')[0],
+      })
+    } catch (error) {
+      console.error('Erro ao registrar usuário:', error)
+      return
+    }
+
+    router.push('/')
+  }
+
   return (
     <LinearGradient
       colors={[lighter, lighter, light]}
@@ -22,7 +61,9 @@ export default function CadastreSePage() {
       <StatusBar barStyle="default" />
       <Logo />
       <View style={styles.form}>
-        <CadastreSeForm />
+        <UserContext value={[user, setUser]}>
+          <CadastreSeForm />
+        </UserContext>
       </View>
       <View style={styles.sugestao}>
         <Sugestao
@@ -32,7 +73,7 @@ export default function CadastreSePage() {
         />
       </View>
       <View style={styles.botaoCadastreSe}>
-        <BotaoAzul texto="Cadastrar-se" />
+        <BotaoAzul texto="Cadastrar-se" onPress={handleRegister} />
       </View>
     </LinearGradient>
   )
