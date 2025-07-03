@@ -1,17 +1,18 @@
 import { FontAwesome } from '@expo/vector-icons'
+import RNDateTimePicker from '@react-native-community/datetimepicker'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import config from '../styles.config'
-import { useState } from 'react'
-import RNDateTimePicker from '@react-native-community/datetimepicker'
 
 const { dark, lighter, light } = config.colors
 const { darkBox } = config.shadows
 
-export const Input = ({
+export const DateInput = ({
   label,
   icon,
+  value,
+  onDateChange,
+  showPicker = false,
   placeholder = '',
-  multiline = false,
   ...props
 }) => {
   const fontSize =
@@ -23,13 +24,20 @@ export const Input = ({
         <FontAwesome name={icon} size={20} color={dark} />
         <Text style={styles.text}>{label}</Text>
       </View>
+      {!!showPicker && (
+        <RNDateTimePicker
+          mode="date"
+          display="spinner"
+          value={value}
+          onChange={onDateChange}
+        />
+      )}
       <TextInput
-        multiline={multiline}
-        numberOfLines={multiline ? 5 : 1}
         maxLength={40}
         style={[styles.input, { fontSize }]}
         placeholder={placeholder}
         placeholderTextColor={light}
+        value={new Intl.DateTimeFormat('pt-BR').format(new Date(value))}
         {...props}
       />
     </View>

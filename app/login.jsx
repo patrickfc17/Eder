@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import config from '../styles.config'
 import { createContext, useState } from 'react'
 import { supabase } from '../src/lib/supabase'
+import { useRouter } from 'expo-router'
 
 const { lighter, light } = config.colors
 const locations = {
@@ -19,6 +20,8 @@ const locations = {
 export const UserContext = createContext()
 
 export default function LoginPage() {
+  const router = useRouter()
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -31,7 +34,7 @@ export default function LoginPage() {
       return
     }
 
-    console.log(data)
+    router.push('/')
   }
 
   return (

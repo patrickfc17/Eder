@@ -11,6 +11,8 @@ import config from '../styles.config'
 import { BarraPesquisa } from '../components/BarraPesquisa'
 import { Header } from '../components/Header'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useRouter } from 'expo-router'
+import { useEffect } from 'react'
 
 const { darker, lighter, light } = config.colors
 const locations = {
@@ -65,6 +67,8 @@ const vagas = [
 ]
 
 export default function HomePage() {
+  const router = useRouter()
+
   return (
     <LinearGradient
       colors={[lighter, lighter, light]}
@@ -75,7 +79,11 @@ export default function HomePage() {
           <Header>
             <BarraPesquisa />
           </Header>
-          <Text style={styles.title}>Vagas Disponíveis</Text>
+          <Text
+            style={styles.title}
+            onPress={() => router.push('/cadastre-se')}>
+            Vagas Disponíveis
+          </Text>
           <FlatList
             data={vagas}
             renderItem={({ item }) => <VagaCard vaga={item} />}
