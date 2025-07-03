@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import config from '../styles.config'
 import { Button } from 'react-native-web'
 
-const { dark, ligther, light } = config.colors
+const { dark, light } = config.colors
 const { darkBox } = config.shadows
 
 export const UploadFile = ({ label, icon, placeholder, ...props }) => {
