@@ -4,6 +4,7 @@ import { CadastrarVagaForm } from '../../components/CadastrarVagaForm'
 import { BotaoAzul } from '../../components/BotaoAzul'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useRef } from 'react'
 import config from '../../styles.config'
 
 const { lighter, light } = config.colors
@@ -14,6 +15,10 @@ const locations = {
 }
 
 export default function CadastrarVaga() {
+  const formRef = useRef(null)
+  const handleCadastrar = () => {
+    formRef.current?.handleSubmit()
+  }
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -22,8 +27,8 @@ export default function CadastrarVaga() {
           locations={[locations.start, locations.middle, locations.end]}>
           <ScrollView>
             <Header />
-            <CadastrarVagaForm />
-            <BotaoAzul texto="Cadastrar"></BotaoAzul>
+            <CadastrarVagaForm ref={formRef} />
+            <BotaoAzul texto="Cadastrar" onPress={handleCadastrar}></BotaoAzul>
           </ScrollView>
         </LinearGradient>
       </SafeAreaView>
